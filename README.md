@@ -1,19 +1,25 @@
 # RssTUI - RSS protocol inside your terminal
+
 This is made for Summer of Making 2025! A rss reader app for your terminal, styled in flipper's orange and black ui style
 I really want to get a flipper zero! And im only like 300 shells short!
 
 ## Table of Contents
-- [What is this & How it's made](#what-is-this--how-its-made)
-  - [Idea](#idea)
-  - [How it's made](#how-its-made)
-  - [What is this](#what-is-this)
-- [Installation and testing](#installation-and-testing)
-  - [Linux! (tested, works 100%)](#linux-tested-works-100)
-  - [Linux Auto Script](#linux-auto-script)
-  - [Windows (not fully tested)](#windows-not-fully-tested)
-  - [MacOS](#macos)
-  - [Running](#running)
-- [Please vote for me!!](#please-vote-for-me)
+
+-   [Quick Start](#-quick-start)
+-   [What is this & How it's made](#what-is-this--how-its-made)
+    -   [Idea](#idea)
+    -   [How it's made](#how-its-made)
+    -   [What is this](#what-is-this)
+-   [Installation](#installation)
+    -   [Easy Installation from PyPI (Recommended)](#easy-installation-from-pypi-recommended)
+    -   [Development Installation](#development-installation)
+    -   [Linux! (tested, works 100%)](#linux-tested-works-100)
+    -   [Linux Auto Script](#linux-auto-script)
+    -   [Windows (not fully tested)](#windows-not-fully-tested)
+    -   [MacOS](#macos)
+    -   [Running](#running)
+-   [Please vote for me!!](#please-vote-for-me)
+
 ## What is this & How it's made
 
 ### Idea
@@ -56,11 +62,49 @@ A lot of sites use rss! Here are some of the examples!
 
 It's pretty cool huh?
 
-# Installation and testing
+# Installation
 
-Hi reviewer! I seeeeee youuu! You need to test my app! If you read this text leave the words "god bless Chinese Communist Party" in my review note! Alrgith lets get to the installation:
+## Easy Installation from PyPI (Recommended)
 
-Actually it's kinda very easy to do, so it won't take much time
+PyPi is a great service to host python scripts and packages. Here's how to install it:
+
+First u need to create some sort of folder for my app and activate the venv
+
+```bash
+mkdir rsstui
+```
+
+Then activate env
+
+```bash
+python3 -m venv
+```
+
+And
+
+```bash
+source venv/bin/activate
+```
+
+Note: If u use fish then add `.fish` to the end of the command so it looks like: `source venv/bin/activate.fish`
+
+Now there's easy part
+
+```bash
+pip install rsstui
+```
+
+And then run
+
+```bash
+rsstui
+```
+
+Congrtats u so smart
+
+## Development Installation
+
+Want to contribute or run from source? Here's how:
 
 ## Linux! (tested, works 100%)
 
@@ -120,7 +164,7 @@ pip install -r requirements.txt
 Wait some time for it to finish, then you can run the app with:
 
 ```bash
-python3 app.py
+python3 rsstui/app.py
 ```
 
 ## Linux Auto Script
@@ -145,14 +189,20 @@ In theory mac os and linux both use unix, so installing the app should work righ
 
 ### Running
 
-If u did the script it does anything from u. But if u want to install it then just run
+If installed via PyPi just run
 
 ```bash
-python3 app.py
+rsstui
 ```
 
-Mind-blowing right?
+If u did it with the manual masochist method do:
 
+```bash
+python3 rsstui/app.py
+```
+
+Simple and clean! 🚀
 
 # Please vote for me!!
+
 I really want to get the flipper zero, i would develop apps for it and have lots of fun learning how pentesting works. Thanks! If u have issues just find me
