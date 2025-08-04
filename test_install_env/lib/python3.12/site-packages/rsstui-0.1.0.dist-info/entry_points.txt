@@ -1,0 +1,2 @@
+[console_scripts]
+rsstui = rsstui.app:main
