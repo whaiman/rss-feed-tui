@@ -1,0 +1,11 @@
+{
+    "Hacker News": "https://feeds.feedburner.com/oreilly/radar",
+    "Reddit Python": "https://www.reddit.com/r/Python/.rss",
+    "BBC News": "http://feeds.bbci.co.uk/news/rss.xml",
+    "Engadget": "https://www.engadget.com/rss.xml",
+    "The Verge": "https://www.theverge.com/rss.xml",
+    "Wired": "https://www.wired.com/feed/rss",
+    "Talking Points": "https://talkingpointsmemo.com/feed/",
+    "TechCrunch": "https://techcrunch.com/feed/",
+    "NYT Global": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"
+}

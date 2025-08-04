@@ -1,1 +1,29 @@
-/__pycache__
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.pytest_cache/
+
+# Virtual environments
+venv/
+env/
+build_env/
+
+# Build artifacts
+build/
+dist/
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Config files (user-specific)
+feeds.json
+discover.json
+feed.json
