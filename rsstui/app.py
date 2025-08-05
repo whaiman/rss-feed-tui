@@ -39,7 +39,7 @@ class Sidebar(Vertical):
         """Load feeds from feeds.json"""
         try:
             feeds_dict = await AsyncFileHandler.load_feeds()
-            self.feed_data = feeds_dict if feeds_dict else {"Add a feed from `Manage Feeds`": ""}
+            self.feed_data = feeds_dict if feeds_dict else {"Add a feed from `Discover Feeds`": ""}
         except Exception as e:
             self.feed_data = {f"Error loading feeds: {e}": ""}
 
@@ -47,9 +47,9 @@ class Sidebar(Vertical):
         yield Static("RSS Feeds", classes="sidebar-title")
 
         for feed in self.feed_data.keys():
-            if feed != "No feeds.json found":
+            if feed != "No feeds.json found" and feed != "Add a feed from `Discover Feeds`":
                 self.feed_buttons.append(feed)
-                feed_id = feed.replace(" ", "_").replace("/", "_").replace(".", "_")
+                feed_id = feed.replace(" ", "_").replace("/", "_").replace(".", "_").replace("`", "_").replace("'", "_").replace('"', "_")
                 yield Button(feed, id=f"feed-{feed_id}", classes="feed")
             else:
                 yield Static(feed, classes="no-feeds-message")
@@ -76,9 +76,9 @@ class Sidebar(Vertical):
         self.feed_buttons.clear()
 
         for feed in new_data.keys():
-            if feed != "No feeds.json found":
+            if feed != "No feeds.json found" and feed != "Add a feed from `Discover Feeds`":
                 self.feed_buttons.append(feed)
-                feed_id = feed.replace(" ", "_").replace("/", "_").replace(".", "_")
+                feed_id = feed.replace(" ", "_").replace("/", "_").replace(".", "_").replace("`", "_").replace("'", "_").replace('"', "_")
                 button = Button(feed, id=f"feed-{feed_id}", classes="feed")
                 self.mount(button, before=add_button)
             else:
@@ -96,7 +96,7 @@ class Sidebar(Vertical):
             feed_title = None
             for feed in self.feed_data.keys():
                 if (
-                    feed.replace(" ", "_").replace("/", "_").replace(".", "_")
+                    feed.replace(" ", "_").replace("/", "_").replace(".", "_").replace("`", "_").replace("'", "_").replace('"', "_")
                     == feed_id
                 ):
                     feed_title = feed
@@ -146,7 +146,8 @@ class MainContent(VerticalScroll):
     def show_welcome(self):
         """Welcome screen"""
         container = self.query_one("#content-container")
-        container.remove_children()
+        for child in list(container.children):
+            child.remove()
 
         welcome_text = Static(
             """
@@ -169,7 +170,8 @@ Styled like a flipper zero because i really want one! (pls vote 4 me :-)""",
     async def show_feed(self, feed_title: str):
         """Show feed's content"""
         container = self.query_one("#content-container")
-        container.remove_children()
+        for child in list(container.children):
+            child.remove()
 
         self.current_feed_title = feed_title
 
@@ -247,7 +249,8 @@ Styled like a flipper zero because i really want one! (pls vote 4 me :-)""",
     def show_article(self, article_index: int):
         """Show individual article content"""
         container = self.query_one("#content-container")
-        container.remove_children()
+        for child in list(container.children):
+            child.remove()
 
         if not self.current_feed_data or "entries" not in self.current_feed_data:
             container.mount(Static("No article data available", classes="error"))
@@ -304,7 +307,9 @@ Styled like a flipper zero because i really want one! (pls vote 4 me :-)""",
     def show_add_feed(self):
         """Add feeds screen"""
         container = self.query_one("#content-container")
-        container.remove_children()
+        for child in list(container.children):
+            child.remove()
+        
         container.mount(Static("Add a feed", classes="add-feed-title"))
         container.mount(
             Static(
@@ -377,7 +382,7 @@ https://www.reddit.com/r/AskReddit/.rss
                     del feeds_dict[feed_to_delete]
                     await AsyncFileHandler.save_feeds(feeds_dict)
                     self.post_message(self.FeedsChanged())
-                    self.show_manage_feeds()
+                    await self.show_manage_feeds()
             except Exception as e:
                 container = self.query_one("#content-container")
                 container.mount(Static(f"Error deleting feed: {e}", classes="error"))
@@ -396,7 +401,7 @@ https://www.reddit.com/r/AskReddit/.rss
                     feeds_dict[feed_name] = feed_url
                     await AsyncFileHandler.save_feeds(feeds_dict)
                     self.post_message(self.FeedsChanged())
-                    self.show_discover_feeds()
+                    await self.show_discover_feeds()
             except Exception as e:
                 container = self.query_one("#content-container")
                 container.mount(Static(f"Error adding feed: {e}", classes="error"))
@@ -404,7 +409,9 @@ https://www.reddit.com/r/AskReddit/.rss
     async def show_manage_feeds(self):
         """Manage feeds screen"""
         container = self.query_one("#content-container")
-        container.remove_children()
+        for child in list(container.children):
+            child.remove()
+        
         container.mount(Static("Manage your feeds", classes="manage-title"))
 
         try:
@@ -421,6 +428,9 @@ https://www.reddit.com/r/AskReddit/.rss
             )
             return
 
+        feeds_scroll = VerticalScroll(classes="manage-feeds-list")
+        container.mount(feeds_scroll)
+
         for i, feed in enumerate(feeds_dict):
             feed_info = Vertical(
                 Static(feed, classes="manage-feed-name"),
@@ -432,14 +442,16 @@ https://www.reddit.com/r/AskReddit/.rss
                 "Delete", id=f"manage-delete-feed-{i}", classes="manage-delete-feed"
             )
 
-            container.mount(
+            feeds_scroll.mount(
                 Horizontal(feed_info, delete_button, classes="manage-feed-row")
             )
 
     async def show_discover_feeds(self):
         """Discover feeds screen"""
         container = self.query_one("#content-container")
-        container.remove_children()
+        for child in list(container.children):
+            child.remove()
+        
         container.mount(Static("Discover feeds", classes="discover-title"))
 
         try:
@@ -462,6 +474,9 @@ https://www.reddit.com/r/AskReddit/.rss
             )
             return
 
+        feeds_scroll = VerticalScroll(classes="discover-feeds-list")
+        container.mount(feeds_scroll)
+
         for i, feed in enumerate(discover_dict):
             feed_info = Vertical(
                 Static(feed, classes="discover-feed-name"),
@@ -473,7 +488,7 @@ https://www.reddit.com/r/AskReddit/.rss
                 f"Add {feed}!", id=f"discover-add-feed-{i}", classes="discover-add-feed"
             )
 
-            container.mount(
+            feeds_scroll.mount(
                 Horizontal(feed_info, add_button, classes="discover-feed-row")
             )
 
@@ -484,10 +499,8 @@ class RssTUI(App):
     def CSS_PATH(self):
         """Get CSS path that works both in development and packaged"""
         if getattr(sys, 'frozen', False):
-            # Running as PyInstaller bundle
             base_path = sys._MEIPASS
         else:
-            # Running as script or installed package
             base_path = os.path.dirname(__file__)
         
         return os.path.join(base_path, "styles", "app.tcss")

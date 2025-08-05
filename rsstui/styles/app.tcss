@@ -142,12 +142,18 @@
         border: ascii black;
     }
 
+    .manage-feeds-list {
+        height: 100%;
+        overflow-y: auto;
+        margin-top: 1;
+    }
+
     .manage-feed-row {
         background: black;
-        height: 4;
+        height: 2;
         color: #FF8200; 
         margin-bottom: 1;
-        padding: 1;
+        padding: 0 1;
     }
 
     .manage-delete-feed {
@@ -156,7 +162,7 @@
         height: 1;
         margin-left: 1;
         background: #FF8200;
-
+        min-width: 8;
     }
 
     .manage-delete-feed:hover {
@@ -165,27 +171,56 @@
 
     .manage-feed-name {
         text-style: bold;
+        height: 1;
+    }
+
+    .manage-feed-url {
+        height: 1;
+        text-style: italic;
+    }
+
+    .manage-feed-info {
+        height: 2;
+        padding: 0;
+    }
+
+    .discover-feeds-list {
+        height: 100%;
+        overflow-y: auto;
+        margin-top: 1;
+    }
+
+    .discover-feed-row {
+        background: black;
+        height: 2;
+        color: #FF8200; 
+        margin-bottom: 1;
+        padding: 0 1;
     }
 
     .discover-feed-info {
-        background: black;
-        height: 4;
-        color: #FF8200; 
-        margin-bottom: 1;
-        padding: 1;
+        height: 2;
+        padding: 0;
     }
 
     .discover-feed-name {
         text-style: bold;
+        height: 1;
+    }
+
+    .discover-feed-url {
+        height: 1;
+        text-style: italic;
     }
 
     .discover-add-feed {
         color: black;
         border: none;
-        height: 4;
+        height: 1;
         margin-left: 1;
         color: #FF8200;
         background: black;
+        min-width: 12;
     }
 
     # Article
@@ -382,12 +417,18 @@
         border: ascii #FF8200;
     }
 
+    .manage-feeds-list {
+        height: 100%;
+        overflow-y: auto;
+        margin-top: 1;
+    }
+
     .manage-feed-row {
         background: #FF8200;
-        height: 4;
+        height: 2;
         color: black;
         margin-bottom: 1;
-        padding: 1;
+        padding: 0 1;
     }
 
     .manage-delete-feed {
@@ -396,6 +437,7 @@
         height: 1;
         margin-left: 1;
         background: black;
+        min-width: 8;
     }
 
     .manage-delete-feed:hover {
@@ -404,27 +446,56 @@
 
     .manage-feed-name {
         text-style: bold;
+        height: 1;
+    }
+
+    .manage-feed-url {
+        height: 1;
+        text-style: italic;
+    }
+
+    .manage-feed-info {
+        height: 2;
+        padding: 0;
+    }
+
+    .discover-feeds-list {
+        height: 100%;
+        overflow-y: auto;
+        margin-top: 1;
+    }
+
+    .discover-feed-row {
+        background: #FF8200;
+        height: 2;
+        color: black;
+        margin-bottom: 1;
+        padding: 0 1;
     }
 
     .discover-feed-info {
-        background: #FF8200;
-        height: 4;
-        color: black;
-        margin-bottom: 1;
-        padding: 1;
+        height: 2;
+        padding: 0;
     }
 
     .discover-feed-name {
         text-style: bold;
+        height: 1;
+    }
+
+    .discover-feed-url {
+        height: 1;
+        text-style: italic;
     }
 
     .discover-add-feed {
         color: #FF8200;
         border: none;
-        height: 4;
+        height: 1;
         margin-left: 1;
         color: black;
         background: #FF8200;
+        min-width: 12;
     }
 
     # Article

@@ -1,8 +1,8 @@
 include README.md
 include LICENSE*
 include pyproject.toml
-include setup.py
 recursive-include rsstui *.py
+recursive-include rsstui *.json
 recursive-include rsstui/styles *.tcss
 exclude venv/
 exclude .git/
