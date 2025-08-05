@@ -14,7 +14,6 @@ I really want to get a flipper zero! And im only like 300 shells short!
     -   [Easy Installation from PyPI (Recommended)](#easy-installation-from-pypi-recommended)
     -   [Development Installation](#development-installation)
     -   [Linux! (tested, works 100%)](#linux-tested-works-100)
-    -   [Linux Auto Script](#linux-auto-script)
     -   [Windows (not fully tested)](#windows-not-fully-tested)
     -   [MacOS](#macos)
     -   [Running](#running)
