@@ -77,7 +77,7 @@ mkdir rsstui
 Then activate env
 
 ```bash
-python3 -m venv
+python3 -m venv venv
 ```
 
 And
