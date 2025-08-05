@@ -167,16 +167,6 @@ Wait some time for it to finish, then you can run the app with:
 python3 rsstui/app.py
 ```
 
-## Linux Auto Script
-
-If you are so lazy i made a auto script just for you
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/yehorscode/RssTUI/refs/heads/main/install.sh | bash
-```
-
-This script automatically copies the repo, installs requirements, tries to activate pyenv tries to activate venv and runs the app!
-
 ## Windows (not fully tested)
 
 Just use WSL, learn how to install and use it: [Microsoft docs link](https://learn.microsoft.com/en-us/windows/wsl/install)
