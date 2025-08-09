@@ -12,7 +12,6 @@ class AsyncFeedLoader:
         self.timeout = aiohttp.ClientTimeout(total=timeout)
     
     async def load_feed(self, url: str) -> Optional[Dict[str, Any]]:
-        """Load RSS feed asynchronously"""
         try:
             async with aiohttp.ClientSession(timeout=self.timeout) as session:
                 async with session.get(url) as response:
@@ -37,28 +36,23 @@ class AsyncFeedLoader:
 
 
 class AsyncFileHandler:
-    """Async file operations for feeds.json"""
     
     @staticmethod
     def _get_config_dir() -> Path:
-        """Get the configuration directory for RssTUI"""
         config_dir = Path.home() / ".config" / "rsstui"
         config_dir.mkdir(parents=True, exist_ok=True)
         return config_dir
     
     @staticmethod
     def _get_feeds_file() -> Path:
-        """Get the feeds.json file path"""
         return AsyncFileHandler._get_config_dir() / "feeds.json"
     
     @staticmethod
     def _get_discover_file() -> Path:
-        """Get the discover.json file path"""
         return AsyncFileHandler._get_config_dir() / "discover.json"
     
     @staticmethod
     async def load_feeds() -> Dict[str, str]:
-        """Load feeds from feeds.json asynchronously"""
         feeds_file = AsyncFileHandler._get_feeds_file()
         try:
             async with aiofiles.open(feeds_file, "r") as f:
@@ -71,21 +65,18 @@ class AsyncFileHandler:
     
     @staticmethod
     async def save_feeds(feeds: Dict[str, str]) -> None:
-        """Save feeds to feeds.json asynchronously"""
         feeds_file = AsyncFileHandler._get_feeds_file()
         async with aiofiles.open(feeds_file, "w") as f:
             await f.write(json.dumps(feeds, indent=4))
     
     @staticmethod
     async def load_discover_feeds() -> Dict[str, str]:
-        """Load discover feeds asynchronously"""
         discover_file = AsyncFileHandler._get_discover_file()
         try:
             async with aiofiles.open(discover_file, "r") as f:
                 content = await f.read()
                 return json.loads(content)
         except FileNotFoundError:
-            # Create default discover feeds if file doesn't exist
             await AsyncFileHandler._create_default_discover_feeds()
             async with aiofiles.open(discover_file, "r") as f:
                 content = await f.read()
@@ -95,13 +86,16 @@ class AsyncFileHandler:
     
     @staticmethod
     async def _create_default_discover_feeds() -> None:
-        """Create default discover feeds file"""
         default_feeds = {
-            "Hacker News": "https://feeds.feedburner.com/oreilly/radar",
-            "Wired": "https://www.wired.com/feed/rss",
+            "Hacker News": "https://hnrss.org/frontpage",
             "Reddit Python": "https://www.reddit.com/r/Python/.rss",
             "BBC News": "http://feeds.bbci.co.uk/news/rss.xml",
-            "TechCrunch": "https://techcrunch.com/feed/"
+            "Engadget": "https://www.engadget.com/rss.xml",
+            "The Verge": "https://www.theverge.com/rss.xml",
+            "Wired": "https://www.wired.com/feed/rss",
+            "Talking Points": "https://talkingpointsmemo.com/feed/",
+            "TechCrunch": "https://techcrunch.com/feed/",
+            "NYT Global": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"
         }
         discover_file = AsyncFileHandler._get_discover_file()
         async with aiofiles.open(discover_file, "w") as f:

@@ -271,6 +271,11 @@
         background: black;
         color: white;
     }
+
+    .no-feeds-message {
+        color: black;
+    }
+
 }
 
 .dark {
@@ -555,4 +560,9 @@
     FooterKey .footer-key--key {
         color: #633300ff !important;
     }
+
+    .no-feeds-message {
+        color: #FF8200;
+    }
+
 }

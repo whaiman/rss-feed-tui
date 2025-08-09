@@ -8,6 +8,76 @@ from typing import Dict, Any
 import json
 import os
 import sys
+import html
+import re
+from html.parser import HTMLParser
+import html2text
+
+# Disclaimer: parts of code were redacted with ai (bleh) to work with async because i messed up while trying to make it work
+# sorry guys, but if u look at previous commits you can see that i worked rlly hard on this
+# textual is hell <3
+
+def is_html_content(content: str) -> bool:
+    if not content:
+        return False
+    
+    html_pattern = r'<[^>]+>'
+    return bool(re.search(html_pattern, content))
+
+class ParseHTML(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.text = []
+        self.in_tag = False
+
+    def handle_starttag(self, tag, attrs):
+        if tag in ['br', 'p']:
+            self.text.append('\n')
+        elif tag in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
+            self.text.append('\n## ')
+        elif tag == 'a':
+            for attr, value in attrs:
+                if attr == 'href':
+                    self.text.append(f'[')
+                    break
+    
+    def handle_endtag(self, tag):
+        if tag == 'a':
+            self.text.append(']')
+        elif tag in ['p', 'div']:
+            self.text.append('\n')
+
+    def handle_data(self, data):
+        self.text.append(data.strip())
+
+    def get_text(self):
+        return ''.join(self.text)
+
+def clean_html_content(html_content: str):
+    if not html_content:
+        return "Oops, html content not being parsed/used. errur"
+    
+    if not is_html_content(html_content):
+        return html_content
+
+    try:
+        h = html2text.HTML2Text()
+        h.ignore_links = True
+        h.ignore_images = True
+        h.ignore_mailto_links = True
+        h.ignore_tables = True
+        h.body_width = 0
+
+        cleaned = h.handle(html_content)
+
+        cleaned = re.sub(r'\[/?[^\]]*\]', '', cleaned)
+        cleaned = re.sub(r'\n\s*\n', '\n\n', cleaned)
+        cleaned = re.sub(r' +', ' ', cleaned)
+        return cleaned.strip()
+    except Exception:
+        clean = re.sub(r'<[^>]+>', '', html_content)
+        clean = re.sub(r'\[/?[^\]]*\]', '', clean)
+        return html.unescape(clean).strip()
 
 
 class Sidebar(Vertical):
@@ -32,11 +102,9 @@ class Sidebar(Vertical):
         self.feed_buttons = []
 
     async def on_mount(self) -> None:
-        """Load feeds when sidebar is mounted"""
         await self.load_feeds_async()
 
     async def load_feeds_async(self):
-        """Load feeds from feeds.json"""
         try:
             feeds_dict = await AsyncFileHandler.load_feeds()
             self.feed_data = feeds_dict if feeds_dict else {"Add a feed from `Discover Feeds`": ""}
@@ -61,7 +129,6 @@ class Sidebar(Vertical):
         )
 
     async def watch_feed_data(self, new_data: dict) -> None:
-        """Called when feed_data changes - rebuild the feed buttons"""
         try:
             add_button = self.query_one("#add-feed")
         except:
@@ -86,7 +153,6 @@ class Sidebar(Vertical):
                 self.mount(message, before=add_button)
 
     async def refresh_feeds(self):
-        """Refresh the sidebar with updated feeds"""
         await self.load_feeds_async()
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
@@ -115,10 +181,8 @@ class Sidebar(Vertical):
 
 
 class MainContent(VerticalScroll):
-    """The main father and mother of all the content"""
 
     class FeedsChanged(Message):
-        """Message sent when feeds are added or deleted"""
 
         pass
 
@@ -129,7 +193,6 @@ class MainContent(VerticalScroll):
         self.feed_loader = AsyncFeedLoader()
 
     async def load_feeds_async(self, feed_title: str) -> Dict[str, Any]:
-        """Load specific feed data asynchronously"""
         feeds_dict = await AsyncFileHandler.load_feeds()
         
         if feed_title not in feeds_dict:
@@ -144,7 +207,6 @@ class MainContent(VerticalScroll):
         yield Vertical(id="content-container")
 
     def show_welcome(self):
-        """Welcome screen"""
         container = self.query_one("#content-container")
         for child in list(container.children):
             child.remove()
@@ -168,7 +230,6 @@ Styled like a flipper zero because i really want one! (pls vote 4 me :-)""",
         container.mount(welcome_text)
 
     async def show_feed(self, feed_title: str):
-        """Show feed's content"""
         container = self.query_one("#content-container")
         for child in list(container.children):
             child.remove()
@@ -196,7 +257,7 @@ Styled like a flipper zero because i really want one! (pls vote 4 me :-)""",
         articles_container = VerticalScroll(classes="articles-list")
         container.mount(articles_container)
 
-        loading_widget = Static("Loading feed... Tip: It's async", classes="loading")
+        loading_widget = Static("Loading feed... Fun fact: It's async", classes="loading")
         articles_container.mount(loading_widget)
 
         try:
@@ -247,7 +308,6 @@ Styled like a flipper zero because i really want one! (pls vote 4 me :-)""",
                 )
 
     def show_article(self, article_index: int):
-        """Show individual article content"""
         container = self.query_one("#content-container")
         for child in list(container.children):
             child.remove()
@@ -282,30 +342,31 @@ Styled like a flipper zero because i really want one! (pls vote 4 me :-)""",
                 content = str(entry["content"])
 
         if content:
-            container.mount(Static(content, classes="article-content"))
+            cleaned_content = clean_html_content(content)
+            container.mount(VerticalScroll(Static(cleaned_content, classes="article-content")))
         else:
             container.mount(
-                Static("No content available for this article", classes="no-content")
+                Static("No content available for this article, this might be an error with the RSS feed, and not the app", classes="no-content")
             )
 
         if "link" in entry:
             container.mount(
                 Static(f"\nSee full article: {entry['link']}", classes="article-link")
             )
-
+            
         metadata_parts = []
         if "author" in entry:
             metadata_parts.append(f"\nWritten by: {entry['author']}")
         if "published" in entry:
             metadata_parts.append(f"On {entry['published']}")
-
+        if is_html_content(content):
+            metadata_parts.append("Parsed from HTML")
         if metadata_parts:
             container.mount(
                 Static(" | ".join(metadata_parts), classes="article-metadata")
             )
 
     def show_add_feed(self):
-        """Add feeds screen"""
         container = self.query_one("#content-container")
         for child in list(container.children):
             child.remove()
@@ -339,7 +400,6 @@ https://www.reddit.com/r/AskReddit/.rss
         container.mount(Button("Add!", id="add-feed-button", classes="add-feed-button"))
 
     async def on_button_pressed(self, event: Button.Pressed) -> None:
-        """When user submits a new feed or deletes a feed"""
         if event.button.id == "add-feed-button":
             feed_name = self.query_one("#feed-name-input").value
             feed_url = self.query_one("#feed-url-input").value
@@ -407,7 +467,6 @@ https://www.reddit.com/r/AskReddit/.rss
                 container.mount(Static(f"Error adding feed: {e}", classes="error"))
 
     async def show_manage_feeds(self):
-        """Manage feeds screen"""
         container = self.query_one("#content-container")
         for child in list(container.children):
             child.remove()
@@ -447,7 +506,6 @@ https://www.reddit.com/r/AskReddit/.rss
             )
 
     async def show_discover_feeds(self):
-        """Discover feeds screen"""
         container = self.query_one("#content-container")
         for child in list(container.children):
             child.remove()
@@ -497,7 +555,6 @@ class RssTUI(App):
 
     @property
     def CSS_PATH(self):
-        """Get CSS path that works both in development and packaged"""
         if getattr(sys, 'frozen', False):
             base_path = sys._MEIPASS
         else:
@@ -520,19 +577,16 @@ class RssTUI(App):
         yield Footer(show_command_palette=False, classes="footer")
 
     def on_mount(self) -> None:
-        """Big ass welcome text"""
         main_content = self.query_one("#main-content", MainContent)
         main_content.show_welcome()
 
     async def on_sidebar_feed_selected(self, message: Sidebar.FeedSelected) -> None:
-        """Handles messages for feeds"""
         # lmao ts is like scratch
         # i used to make lots of message sends inside scratch
         main_content = self.query_one("#main-content", MainContent)
         await main_content.show_feed(message.feed_title)
 
     async def on_sidebar_mode_selected(self, message: Sidebar.ModeSelected) -> None:
-        """Handles mode selection (sends messages)"""
         main_content = self.query_one("#main-content", MainContent)
 
         if message.mode == "add":
@@ -543,7 +597,6 @@ class RssTUI(App):
             await main_content.show_discover_feeds()
 
     async def on_main_content_feeds_changed(self, message: MainContent.FeedsChanged) -> None:
-        """Handle feeds changed message by refreshing the sidebar"""
         sidebar = self.query_one("#sidebar", Sidebar)
         await sidebar.refresh_feeds()
 
@@ -565,7 +618,6 @@ class RssTUI(App):
 
 
 def main():
-    """Main entry point for the application"""
     app = RssTUI()
     app.run()
 
