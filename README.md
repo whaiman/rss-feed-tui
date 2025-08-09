@@ -33,6 +33,62 @@ Textual draws clickable and interactable User Interfaces inside your terminal wi
 You can do things like add buttons, inputs, static text and if you convert your image to characters then you can display it!
 Learn more on Textual wiki: https://textual.textualize.io/
 
+### Inner workings
+
+_And i wonder, if you know..._ how it works! - _probably kanye east_
+
+As i said previously, i use Textual. It's really a great library. But some feeds return HTML content. And as you have guessed: it isn't easibly readable for us humans, and we arent horses, we are humans.
+
+So how do i go around this? Well it's actually pretty easy (if you don't count in regex i hate regex with all of my hearth)
+I just use the `html2text` library! Then i can write pretty simple (again not counting regex) methods to parse html into pretty text
+
+First we need to write a main class for html parsing, it initiates the parser and says what to parse, heres it:
+
+```python
+class ParseHTML(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.text = []
+        self.in_tag = False
+
+    def handle_starttag(self, tag, attrs):
+        if tag in ['br', 'p']:
+            self.text.append('\n')
+        elif tag in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
+            self.text.append('\n## ')
+        elif tag == 'a':
+            for attr, value in attrs:
+                if attr == 'href':
+                    self.text.append(f'[')
+                    break
+
+    def handle_endtag(self, tag):
+        if tag == 'a':
+            self.text.append(']')
+        elif tag in ['p', 'div']:
+            self.text.append('\n')
+
+    def handle_data(self, data):
+        self.text.append(data.strip())
+
+    def get_text(self):
+        return ''.join(self.text)
+```
+
+Not much right? Yeah i think so
+Now important thing is we ont use it directly, it just makes changes to the `HTMLParser` from `html`
+We then use the `HTML2Text` in code from `html2text`. Now i dont really understand fully how this all works, classes are like dark magic for me. But they work!
+
+### Why doesnt the app support images
+
+Because it's a pain in the butt to do so. WHy? Images are big, like very big 1080x1920 pixel, that's 2073600 in total!!!!!
+And the terminal (textual library) can draw pixels as text or unicode color blobs or something i dont remember honestly. all of what i say may be wrong so dont really use what i say as a guide okay?
+So to draw an image we need a lot of pixels, that we dont have. Now there are workorounds but theyr hard to do etc etc. I can always convert an image to be 40x40 pixels which is much smaller, but that means we lose all the details and probably you wouldn't be even able to recognise what it was before pixelifying
+
+### What type of feed can i add?
+A rss feed, any rss feed. as long as it doesnt use [buss:// protocol or something](https://youtu.be/qiOtinFFfk8?si=iK7dqXbvJcF0ulY5)
+It can have HTML inside it, but only basic nothing crazy. Yeah that's about it
+
 ### What is this
 
 Firts let's go throught the basics: **What Is RSS**?
