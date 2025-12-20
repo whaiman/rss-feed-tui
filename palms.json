@@ -1,4 +1,4 @@
 {
     "setup": "pip install -e .",
-    "run": "rsstui"
+    "run": "rss-feed-tui"
 }
