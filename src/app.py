@@ -10,13 +10,14 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 import html2text
-from async_feed import AsyncFeedLoader, AsyncFileHandler
 from textual import on
 from textual.app import App, ComposeResult
-from textual.containers import Horizontal, Vertical, VerticalScroll
+from textual.containers import Center, Horizontal, Vertical, VerticalScroll
 from textual.message import Message
 from textual.reactive import reactive
 from textual.widgets import Button, Footer, Header, Input, Static
+
+from async_feed import AsyncFeedLoader, AsyncFileHandler
 
 # =============================================================================
 # HTML Cleaning Utilities
@@ -125,13 +126,14 @@ class Sidebar(Vertical):
 
     def compose(self) -> ComposeResult:
         yield Static("RSS Feeds", classes="sidebar-title")
-        yield Button("Add feed", id="add-feed", classes="action-btn")
-        yield Button("Manage feeds", id="manage-feeds", classes="action-btn")
-        yield Button("Discover feeds", id="discover-feeds", classes="action-btn")
+        yield Center(Button("Add feed", id="add-feed", classes="action-btn"))
+        yield Center(Button("Manage feeds", id="manage-feeds", classes="action-btn"))
+        yield Center(
+            Button("Discover feeds", id="discover-feeds", classes="action-btn")
+        )
 
     async def watch_feed_data(self, feeds: Dict[str, str]) -> None:
         """Dynamically update feed buttons when feed_data changes."""
-        # Remove old feed buttons/messages
         for node in self.query(".feed-btn, .no-feeds-message"):
             await node.remove()
 
@@ -228,19 +230,44 @@ A clean, modern terminal RSS reader.
 
         container = self.query_one("#content")
 
-        # Header with search
-        container.mount(
-            Horizontal(
-                Static(f"Feed: {title}", classes="feed-title"),
-                Static("Click article to read →", classes="feed-hint"),
-                Vertical(
-                    Input(placeholder="Search articles…", id="search-input"),
-                    Button("Search", id="search-btn", classes="search-btn"),
-                    classes="search-box",
-                ),
-                classes="feed-header",
-            )
+        header = Horizontal(classes="feed-header-root")
+        await container.mount(header)
+
+        left_part = Vertical(
+            Static(f"📻 {title}", classes="feed-title-big"),
+            Static("Click article to read →", classes="feed-hint"),
+            Static("↑↓ - navigation, • Enter - open • q - exit", classes="feed-hint"),
+            classes="feed-info-left",
         )
+
+        search_part = Vertical(
+            # Horizontal(
+            #     Static(f"Feed: {title}", classes="feed-title"),
+            # ),
+            Horizontal(
+                Input(placeholder="Search articles…", id="search-input"),
+                Button("Search", id="search-btn", classes="search-btn"),
+                classes="search-box",
+            ),
+            classes="feed-header-right",
+        )
+
+        await header.mount(left_part)
+        await header.mount(search_part)
+
+        # Header with search
+        # container.mount(
+        #     Horizontal(
+        #         Static(f"Feed: {title}", classes="feed-title"),
+        #         Static("Click article to read →", classes="feed-hint"),
+        #         Vertical(
+        #             Input(placeholder="Search articles…", id="search-input"),
+        #             Button("Search", id="search-btn", classes="search-btn"),
+        #             classes="search-box",
+        #         ),
+        #         classes="feed-header",
+        #     )
+        # )
 
         articles_area = VerticalScroll(classes="articles-list")
         container.mount(articles_area)
@@ -464,6 +491,7 @@ class RssFeedTUI(App):
         ("d", "toggle_dark", "Toggle dark mode"),
         ("q", "quit", "Quit"),
         ("h", "go_home", "Home"),
+        ("slash", "focus_search", "Focus search"),
     ]
 
     def compose(self) -> ComposeResult:
@@ -498,6 +526,14 @@ class RssFeedTUI(App):
 
     def action_go_home(self) -> None:
         self.query_one(MainContent).show_welcome()
+
+    # def action_focus_search(self) -> None:
+    #     """Фокус на поле поиска по клавише /"""
+    #     try:
+    #         search_input = self.query_one("#search-input", Input)
+    #         search_input.focus()
+    #     except:
+    #         pass
 
 
 def main() -> None:
