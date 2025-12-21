@@ -46,7 +46,7 @@ rss-feed-tui
 
 - Linux - fully tested and works great
 - macOS - should work out of the box
-- Windows - fully teste and works great
+- Windows - fully tested and works great
 
 ## Usage
 
