@@ -513,7 +513,6 @@ class RssFeedTUI(App):
         self.query_one(MainContent).show_welcome()
 
     def action_focus_search(self) -> None:
-        """Фокус на поле поиска по клавише /"""
         try:
             search_input = self.query_one("#search-input", Input)
             search_input.focus()

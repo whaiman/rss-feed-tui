@@ -168,7 +168,7 @@ Screen {
 
 .articles-list {
     width: 100%;
-    height: auto;
+    height: 1fr;
     border: solid $panel;
     background: $surface;
     padding: 1;
@@ -322,7 +322,7 @@ Screen {
 
 .manage-list {
     width: 100%;
-    height: auto;
+    height: 1fr;
     border: solid $panel;
     padding: 1;
     overflow-y: auto;
@@ -384,7 +384,7 @@ Screen {
 
 .discover-list {
     width: 100%;
-    height: auto;
+    height: 1fr;
     border: solid $panel;
     padding: 1;
     overflow-y: auto;
@@ -508,6 +508,69 @@ Screen.light #main-content {
     background: #ffffff;
 }
 
+Screen.light .manage-row, Screen.light .discover-row {
+    background: #f9fafb;
+    border: solid #d1d5db;
+}
+
+Screen.light .manage-row:hover, Screen.light .discover-row:hover {
+    background: #dbeafe;
+    border: solid #3b82f6;
+}
+
+Screen.light #name-input, Screen.light #url-input, Screen.light #search-input {
+    background: #ffffff;
+    border: solid #d1d5db;
+    color: #1f2937;
+}
+
+Screen.light .section-title {
+    color: #1e40af;
+}
+
+Screen.light .feed-title-big {
+    color: #1e40af;
+}
+
+Screen.light .article-title {
+    color: #1e40af;
+}
+
+Screen.light .back-btn {
+    background: #e8e8e8;
+    color: #1f2937;
+}
+
+Screen.light .back-btn:hover {
+    background: #3b82f6;
+    color: #ffffff;
+}
+
+Screen.light .search-btn {
+    background: #22c55e;
+    color: #ffffff;
+}
+
+Screen.light .primary-btn {
+    background: #22c55e;
+    color: #ffffff;
+}
+
+Screen.light .delete-btn {
+    background: #ef4444;
+    color: #ffffff;
+}
+
+Screen.light .add-discover-btn {
+    background: #22c55e;
+    color: #ffffff;
+}
+
+Screen.light .articles-list, Screen.light .manage-list, Screen.light .discover-list {
+    background: #ffffff;
+    border: solid #d1d5db;
+}
+
 /* Dark Mode */
 Screen.dark {
     background: #0a0a0a;
@@ -587,4 +650,89 @@ Screen.dark #name-input, Screen.dark #url-input, Screen.dark #search-input {
 
 Screen.dark .section-title {
     color: #60a5fa;
+}
+
+Screen.dark .feed-title-big {
+    color: #60a5fa;
+}
+
+Screen.dark .article-title {
+    color: #60a5fa;
+}
+
+Screen.dark .back-btn {
+    background: #1a1a1a;
+    color: #e5e7eb;
+}
+
+Screen.dark .back-btn:hover {
+    background: #3b82f6;
+    color: #ffffff;
+}
+
+Screen.dark .search-btn {
+    background: #22c55e;
+    color: #ffffff;
+}
+
+Screen.dark .primary-btn {
+    background: #22c55e;
+    color: #ffffff;
+}
+
+Screen.dark .delete-btn {
+    background: #ef4444;
+    color: #ffffff;
+}
+
+Screen.dark .add-discover-btn {
+    background: #22c55e;
+    color: #ffffff;
+}
+
+Screen.dark .articles-list, Screen.dark .manage-list, Screen.dark .discover-list {
+    background: #0f0f0f;
+    border: solid #404040;
+}
+
+/* --- Scrollbar Styles --- */
+
+/* По умолчанию (и для светлой темы) — тёмно-синий скроллбар */
+VerticalScroll {
+    scrollbar-size: 1 1;
+    scrollbar-background: #334155;
+    scrollbar-color: #6366f1;
+    scrollbar-corner-color: #1e293b;
+    scrollbar-background-hover: #475569;
+    scrollbar-color-hover: #8b5cf6;
+}
+
+/* Тёмная тема — светло-голубой скроллбар */
+Screen.dark VerticalScroll {
+    scrollbar-size: 1 1;
+    scrollbar-background: #cbd5e1;
+    scrollbar-color: #06b6d4;
+    scrollbar-corner-color: #e2e8f0;
+    scrollbar-background-hover: #94a3b8;
+    scrollbar-color-hover: #0891b2;
+}
+
+/* Общие стили скроллбара для всего приложения */
+Scrollbar {
+    background: transparent;
+}
+
+/* Угол скроллбара под цвет панели/сайдбара */
+ScrollbarCorner {
+    background: $panel;
+}
+
+/* Дополнительно для светлой темы */
+Screen.light ScrollbarCorner {
+    background: #e8e8e8;
+}
+
+/* Дополнительно для тёмной темы */
+Screen.dark ScrollbarCorner {
+    background: #1a1a1a;
 }
