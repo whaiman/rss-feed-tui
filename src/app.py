@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import html
 import re
-import sys
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, Dict, List
@@ -254,20 +253,6 @@ A clean, modern terminal RSS reader.
 
         await header.mount(left_part)
         await header.mount(search_part)
-
-        # Header with search
-        # container.mount(
-        #     Horizontal(
-        #         Static(f"Feed: {title}", classes="feed-title"),
-        #         Static("Click article to read →", classes="feed-hint"),
-        #         Vertical(
-        #             Input(placeholder="Search articles…", id="search-input"),
-        #             Button("Search", id="search-btn", classes="search-btn"),
-        #             classes="search-box",
-        #         ),
-        #         classes="feed-header",
-        #     )
-        # )
 
         articles_area = VerticalScroll(classes="articles-list")
         container.mount(articles_area)
@@ -527,13 +512,13 @@ class RssFeedTUI(App):
     def action_go_home(self) -> None:
         self.query_one(MainContent).show_welcome()
 
-    # def action_focus_search(self) -> None:
-    #     """Фокус на поле поиска по клавише /"""
-    #     try:
-    #         search_input = self.query_one("#search-input", Input)
-    #         search_input.focus()
-    #     except:
-    #         pass
+    def action_focus_search(self) -> None:
+        """Фокус на поле поиска по клавише /"""
+        try:
+            search_input = self.query_one("#search-input", Input)
+            search_input.focus()
+        except:
+            pass
 
 
 def main() -> None:

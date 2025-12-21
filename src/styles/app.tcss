@@ -1,705 +1,590 @@
-# Light theme
-.light {
-	#main-content {
-        background: #f8fafc;
-}
+/* =============================================================================
+   RSS Feed TUI Styles
+   ============================================================================= */
 
-#main-content Static {
-	background: transparent;
-}
+/* --- Global Layout --- */
 
-#header {
-	background: #0891b2;
-	color: white;
-	border-bottom: solid #06b6d4;
-	height: 2;
-	text-style: bold;
+Screen {
+    background: $surface;
 }
 
 #sidebar {
-	dock: left;
-	width: 22;
-	height: 100%;
-	color: #0f172a;
-	background: #e0f2fe;
-	align: center top;
-	border-right: tall #0891b2;
+    width: 30;
+    height: 100%;
+    background: $panel;
+    border-right: thick $primary;
+    padding: 1;
 }
 
 #main-content {
-	background: #ffffff;
-	color: #1e293b;
-	border-left: solid #0891b2;
-	padding: 0 2 0 2;
+    width: 1fr;
+    height: 100%;
+    padding: 1 2;
 }
 
+/* --- Sidebar Styles --- */
+
 .sidebar-title {
-	text-style: bold;
-	padding: 1;
-	color: #0891b2;
-	background: #cffafe;
-	text-align: center;
-	border: round #06b6d4;
-	margin: 1 0;
+    width: 100%;
+    height: auto;
+    content-align: center middle;
+    text-style: bold;
+    color: $accent;
+    margin-bottom: 1;
+    border-bottom: solid $primary;
+    padding-bottom: 1;
 }
 
 .action-btn {
-	height: 3;
-	background: #06b6d4;
-	width: 90%;
-	color: white;
-	margin: 1 0;
-	border: round #0891b2;
-	text-style: bold;
+    width: 90%;
+    height: auto;
+    margin: 1 0;
+    background: $primary;
+    color: $text;
+    border: solid $accent;
 }
 
 .action-btn:hover {
-	background: #0891b2;
-	color: white;
+    background: $accent;
+    color: $background;
+    text-style: bold;
+}
+
+.action-btn:focus {
+    border: thick $success;
 }
 
 .feed-btn {
-	height: 3;
-	background: #f0fdfa;
-	width: 90%;
-	color: #0f172a;
-	margin: 1 0;
-	border: solid #06b6d4;
+    width: 90%;
+    height: auto;
+    margin: 0 0 1 0;
+    background: $surface;
+    color: $text;
+    border: solid $panel;
+    text-align: left;
+    padding: 0 1;
 }
 
 .feed-btn:hover {
-	background: #ccfbf1;
-	color: #0891b2;
-	border: heavy #0891b2;
+    background: $primary-lighten-2;
+    border: solid $accent;
+}
+
+.feed-btn:focus {
+    background: $primary-lighten-1;
+    border: thick $accent;
+    text-style: bold;
 }
 
 .no-feeds-message {
-	color: #64748b;
-	text-style: italic;
-	padding: 1;
-	text-align: center;
+    width: 100%;
+    height: auto;
+    color: $text-muted;
+    text-align: center;
+    margin: 2 0;
+    text-style: italic;
 }
+
+/* --- Welcome Screen --- */
 
 .welcome {
-	text-align: center;
-	color: #0891b2;
-	padding: 2;
-	text-style: bold;
-}
-
-.section-title {
-	text-style: bold;
-	color: #0891b2;
-	background: #ecfeff;
-	padding: 1;
-	border: round #06b6d4;
-	margin-bottom: 1;
-	text-align: center;
-}
-
-Input {
-	background: #f8fafc;
-	color: #0f172a;
-	border: tall #06b6d4;
-	margin: 1 0;
-}
-
-Input:focus {
-	border: tall #0891b2;
-	background: #ffffff;
-}
-
-.primary-btn {
-	background: #06b6d4;
-	color: white;
-	border: round #0891b2;
-	height: 3;
-	margin-top: 1;
-	text-style: bold;
-}
-
-.primary-btn:hover {
-	background: #0891b2;
-}
-
-.feed-header {
-	background: #ecfeff;
-	padding: 1;
-	border: round #06b6d4;
-	margin-bottom: 1;
-}
-
-.feed-title {
-	text-style: bold;
-	color: #0891b2;
-	padding: 0 1;
-}
-
-.feed-hint {
-	color: #64748b;
-	text-style: italic;
-	padding: 0 1;
-}
-
-.search-box {
-	background: transparent;
-	padding: 0;
-}
-
-.search-btn {
-	background: #06b6d4;
-	color: white;
-	border: round #0891b2;
-	height: 3;
-	margin-top: 1;
-	text-style: bold;
-}
-
-.search-btn:hover {
-	background: #0891b2;
-}
-
-.articles-list {
-	height: 100%;
-	overflow-y: auto;
-	padding: 1 0;
-}
-
-.article-btn {
-	background: #f8fafc;
-	color: #0f172a;
-	border: solid #06b6d4;
-	height: 3;
-	margin: 1 0;
-	padding: 0 1;
-}
-
-.article-btn:hover {
-	background: #ecfeff;
-	color: #0891b2;
-	border: heavy #0891b2;
-}
-
-.back-btn {
-	background: #ecfeff;
-	color: #0891b2;
-	border: round #06b6d4;
-	height: 3;
-	margin-bottom: 1;
-	text-style: bold;
-}
-
-.back-btn:hover {
-	background: #cffafe;
-}
-
-.article-title {
-	background: #ecfeff;
-	color: #0c4a6e;
-	text-style: bold;
-	padding: 1;
-	border: round #06b6d4;
-	margin-bottom: 1;
-}
-
-.article-content {
-	background: #ffffff;
-	color: #334155;
-	padding: 1;
-	border: solid #cbd5e1;
-	height: auto;
-}
-
-.article-link {
-	color: #0891b2;
-	text-style: italic;
-	padding: 1;
-	background: #f0fdfa;
-	margin-top: 1;
-}
-
-.article-meta {
-	color: #64748b;
-	text-style: italic;
-	padding: 1;
-	margin-top: 1;
-}
-
-.manage-list, .discover-list {
-	height: 100%;
-	overflow-y: auto;
-	padding: 1 0;
-}
-
-.manage-row, .discover-row {
-	background: #f0fdfa;
-	height: auto;
-	color: #0f172a;
-	margin-bottom: 1;
-	padding: 1;
-	border: solid #06b6d4;
-}
-
-.manage-name, .discover-name {
-	text-style: bold;
-	color: #0891b2;
-	height: auto;
-}
-
-.manage-url, .discover-url {
-	text-style: italic;
-	color: #64748b;
-	height: auto;
-}
-
-.delete-btn {
-	background: #ef4444;
-	color: white;
-	border: round #dc2626;
-	height: 3;
-	min-width: 10;
-	text-style: bold;
-	margin-left: 1;
-}
-
-.delete-btn:hover {
-	background: #dc2626;
-}
-
-.add-discover-btn {
-	background: #06b6d4;
-	color: white;
-	border: round #0891b2;
-	height: 3;
-	min-width: 10;
-	text-style: bold;
-	margin-left: 1;
-}
-
-.add-discover-btn:hover {
-	background: #0891b2;
-}
-
-.loading {
-	color: #64748b;
-	text-style: italic;
-	text-align: center;
-	padding: 2;
-}
-
-.error {
-	color: #ef4444;
-	text-style: bold;
-	padding: 1;
-	background: #fef2f2;
-	border: solid #fca5a5;
-}
-
-.info {
-	color: #0891b2;
-	text-style: italic;
-	padding: 1;
-}
-
-VerticalScroll {
-	scrollbar-size: 1 1;
-	scrollbar-background: #cbd5e1;
-	scrollbar-color: #06b6d4;
-	scrollbar-corner-color: #e2e8f0;
-	scrollbar-background-hover: #94a3b8;
-	scrollbar-color-hover: #0891b2;
-}
-
-Footer {
-	background: #0891b2;
-	color: white;
-}
-
-FooterKey .footer-key--description {
-	color: white;
-}
-
-FooterKey .footer-key--key {
-	color: #ecfeff;
-	text-style: bold;
-}
-}
-
-# Dark theme
-.dark {
-	#main-content {
-        background: #0f172a;
-}
-
-#main-content Static {
-	background: transparent;
-}
-
-#header {
-	background: #6366f1;
-	color: #f8fafc;
-	border-bottom: solid #818cf8;
-	height: 2;
-	text-style: bold;
-}
-
-#sidebar {
-	dock: left;
-	width: 22;
-	height: 100%;
-	color: #e0e7ff;
-	background: #1e1b4b;
-	align: center top;
-	border-right: tall #6366f1;
-}
-
-#main-content {
-	background: #0f172a;
-	color: #e2e8f0;
-	border-left: solid #6366f1;
-	padding: 0 2 0 2;
-}
-
-.sidebar-title {
-	text-style: bold;
-	padding: 1;
-	color: #c7d2fe;
-	background: #312e81;
-	text-align: center;
-	border: round #6366f1;
-	margin: 1 0;
-}
-
-.action-btn {
-	height: 3;
-	background: #6366f1;
-	width: 90%;
-	color: #f8fafc;
-	margin: 1 0;
-	border: round #4f46e5;
-	text-style: bold;
-}
-
-.action-btn:hover {
-	background: #8b5cf6;
-	color: #faf5ff;
-}
-
-.feed-btn {
-	height: 3;
-	background: #1e1b4b;
-	width: 90%;
-	color: #c7d2fe;
-	margin: 1 0;
-	border: solid #6366f1;
-}
-
-.feed-btn:hover {
-	background: #312e81;
-	color: #e0e7ff;
-	border: heavy #8b5cf6;
-}
-
-.no-feeds-message {
-	color: #94a3b8;
-	text-style: italic;
-	padding: 1;
-	text-align: center;
-}
-
-.welcome {
-	text-align: center;
-	color: #a5b4fc;
-	padding: 2;
-	text-style: bold;
-}
-
-.section-title {
-	text-style: bold;
-	color: #c7d2fe;
-	background: #312e81;
-	padding: 1;
-	border: round #6366f1;
-	margin-bottom: 1;
-	text-align: center;
-}
-
-Input {
-	background: #1e293b;
-	color: #e2e8f0;
-	border: tall #6366f1;
-	margin: 1 0;
-}
-
-Input:focus {
-	border: tall #8b5cf6;
-	background: #334155;
-}
-
-.primary-btn {
-	background: #6366f1;
-	color: #f8fafc;
-	border: round #4f46e5;
-	height: 3;
-	margin-top: 1;
-	text-style: bold;
-}
-
-.primary-btn:hover {
-	background: #8b5cf6;
-}
-
-.feed-header {
-	background: #1e1b4b;
-	padding: 1;
-	border: round #6366f1;
-	margin-bottom: 1;
-}
-
-.feed-title {
-	text-style: bold;
-	color: #c7d2fe;
-	padding: 0 1;
-}
-
-.feed-hint {
-	color: #94a3b8;
-	text-style: italic;
-	padding: 0 1;
-}
-
-.search-box {
-	background: transparent;
-	padding: 0;
-}
-
-.search-btn {
-	background: #6366f1;
-	color: #f8fafc;
-	border: round #4f46e5;
-	height: 3;
-	margin-top: 1;
-	text-style: bold;
-}
-
-.search-btn:hover {
-	background: #8b5cf6;
-}
-
-.articles-list {
-	height: 100%;
-	overflow-y: auto;
-	padding: 1 0;
-}
-
-.article-btn {
-	background: #1e293b;
-	color: #e2e8f0;
-	border: solid #6366f1;
-	height: 3;
-	margin: 1 0;
-	padding: 0 1;
-}
-
-.article-btn:hover {
-	background: #312e81;
-	color: #c7d2fe;
-	border: heavy #8b5cf6;
-}
-
-.back-btn {
-	background: #1e1b4b;
-	color: #c7d2fe;
-	border: round #6366f1;
-	height: 3;
-	margin-bottom: 1;
-	text-style: bold;
-}
-
-.back-btn:hover {
-	background: #312e81;
-}
-
-.article-title {
-	background: #312e81;
-	color: #e0e7ff;
-	text-style: bold;
-	padding: 1;
-	border: round #6366f1;
-	margin-bottom: 1;
-}
-
-.article-content {
-	background: #1e293b;
-	color: #cbd5e1;
-	padding: 1;
-	border: solid #475569;
-	height: auto;
-}
-
-.article-link {
-	color: #a5b4fc;
-	text-style: italic;
-	padding: 1;
-	background: #1e1b4b;
-	margin-top: 1;
-}
-
-.article-meta {
-	color: #94a3b8;
-	text-style: italic;
-	padding: 1;
-	margin-top: 1;
-}
-
-.manage-list, .discover-list {
-	height: 100%;
-	overflow-y: auto;
-	padding: 1 0;
-}
-
-.manage-row, .discover-row {
-	background: #1e1b4b;
-	height: auto;
-	color: #e0e7ff;
-	margin-bottom: 1;
-	padding: 1;
-	border: solid #6366f1;
-}
-
-.manage-name, .discover-name {
-	text-style: bold;
-	color: #c7d2fe;
-	height: auto;
-}
-
-.manage-url, .discover-url {
-	text-style: italic;
-	color: #94a3b8;
-	height: auto;
-}
-
-.delete-btn {
-	background: #ef4444;
-	color: white;
-	border: round #dc2626;
-	height: 3;
-	min-width: 10;
-	text-style: bold;
-	margin-left: 1;
-}
-
-.delete-btn:hover {
-	background: #f87171;
-}
-
-.add-discover-btn {
-	background: #6366f1;
-	color: #f8fafc;
-	border: round #4f46e5;
-	height: 3;
-	min-width: 10;
-	text-style: bold;
-	margin-left: 1;
-}
-
-.add-discover-btn:hover {
-	background: #8b5cf6;
-}
-
-.loading {
-	color: #94a3b8;
-	text-style: italic;
-	text-align: center;
-	padding: 2;
-}
-
-.error {
-	color: #fca5a5;
-	text-style: bold;
-	padding: 1;
-	background: #450a0a;
-	border: solid #991b1b;
-}
-
-.info {
-	color: #a5b4fc;
-	text-style: italic;
-	padding: 1;
-}
-
-VerticalScroll {
-	scrollbar-size: 1 1;
-	scrollbar-background: #334155;
-	scrollbar-color: #6366f1;
-	scrollbar-corner-color: #1e293b;
-	scrollbar-background-hover: #475569;
-	scrollbar-color-hover: #8b5cf6;
-}
-
-Footer {
-	background: #6366f1;
-	color: #f8fafc;
-}
-
-FooterKey .footer-key--description {
-	color: #f8fafc;
-}
-
-FooterKey .footer-key--key {
-	color: #e0e7ff;
-	text-style: bold;
-}
-}
+    width: 100%;
+    height: auto;
+    content-align: center middle;
+    color: $accent;
+    text-style: bold;
+    padding: 2;
+}
+
+/* --- Feed Header --- */
 
 .feed-header-root {
-	height: 9;
-	margin-bottom: 1;
-	padding: 0 1;
-	background: $primary 10%;
-	border-bottom: tall $primary;
+    width: 100%;
+    height: auto;
+    margin-bottom: 2;
+    border-bottom: heavy $primary;
+    padding-bottom: 1;
+}
+
+.feed-info-left {
+    width: 60%;
+    height: auto;
+}
+
+.feed-header-right {
+    width: 40%;
+    height: auto;
+    align: right middle;
 }
 
 .feed-title-big {
-	text-style: bold;
-	height: 3;
-	content-align: center top;
-    # align: center middle;
-	background: $primary 20%;
-	border: tall $primary;
-	width: 100%;
+    width: 100%;
+    height: auto;
+    text-style: bold;
+    color: $accent;
+    text-align: left;
 }
 
 .feed-hint {
-	color: $text-muted;
-	text-style: italic dim;
-	height: 1;
-	content-align: center middle;
-}
-
-.search-container {
-	width: auto;
-	align: right middle;
-}
-
-#search-input {
-	width: 30;
-	border: thick $primary;
-}
-
-#search-input:focus {
-	border: thick $accent;
-}
-
-.search-btn {
-	border: thick $primary;
-	min-width: 4;
-}
-.feed-header-right {
-    width: 1fr;
-    align: right top;
+    width: 100%;
+    height: auto;
+    color: $text-muted;
+    text-style: italic;
+    margin-top: 1;
 }
 
 .search-box {
-    align: center middle;
+    width: 100%;
+    height: auto;
+    align: right middle;
+}
+
+#search-input {
+    width: 70%;
+    height: auto;
+    border: solid $primary;
+    background: $surface;
+    margin-right: 1;
+}
+
+#search-input:focus {
+    border: thick $accent;
+}
+
+.search-btn {
+    width: auto;
+    height: auto;
+    background: $success;
+    color: $text;
+    border: solid $success-darken-1;
+}
+
+.search-btn:hover {
+    background: $success-lighten-1;
+    text-style: bold;
+}
+
+/* --- Articles List --- */
+
+.articles-list {
+    width: 100%;
+    height: auto;
+    border: solid $panel;
+    background: $surface;
+    padding: 1;
+    overflow-y: auto;
+}
+
+.article-btn {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1;
+    background: $panel;
+    color: $text;
+    border: solid $primary;
+    text-align: left;
+    padding: 1 2;
+}
+
+.article-btn:hover {
+    background: $primary-lighten-2;
+    border: solid $accent;
+}
+
+.article-btn:focus {
+    background: $primary-lighten-1;
+    border: thick $accent;
+    text-style: bold;
+}
+
+.loading {
+    width: 100%;
+    height: auto;
+    content-align: center middle;
+    color: $warning;
+    text-style: italic;
+    padding: 2;
+}
+
+.error {
+    width: 100%;
+    height: auto;
+    color: $error;
+    text-style: bold;
+    padding: 1;
+    background: $error-darken-3;
+    border: solid $error;
+    margin: 1 0;
+}
+
+/* --- Article View --- */
+
+.back-btn {
+    width: auto;
+    height: auto;
+    margin-bottom: 2;
+    background: $panel;
+    color: $text;
+    border: solid $primary;
+}
+
+.back-btn:hover {
+    background: $primary;
+    border: solid $accent;
+}
+
+.article-title {
+    width: 100%;
+    height: auto;
+    text-style: bold;
+    color: $accent;
+    padding: 1 0;
+    border-bottom: solid $primary;
+    margin-bottom: 2;
+}
+
+.article-content {
+    width: 100%;
+    height: 1fr;
+    color: $text;
+    padding: 1;
+    background: $surface;
+    border: solid $panel;
+    margin-bottom: 2;
+}
+
+.article-link {
+    width: 100%;
+    height: auto;
+    color: $success;
+    text-style: italic;
+    padding: 1 0;
+}
+
+.article-meta {
+    width: 100%;
+    height: auto;
+    color: $text-muted;
+    text-style: italic;
+    padding: 1 0;
+    margin-top: 1;
+}
+
+/* --- Add/Manage Screens --- */
+
+.section-title {
+    width: 100%;
+    height: auto;
+    text-style: bold;
+    color: $accent;
+    padding: 1 0;
+    border-bottom: heavy $primary;
+    margin-bottom: 2;
+}
+
+#name-input, #url-input {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1;
+    border: solid $primary;
+    background: $surface;
+    padding: 0 1;
+}
+
+#name-input:focus, #url-input:focus {
+    border: thick $accent;
+}
+
+.primary-btn {
+    width: auto;
+    height: auto;
+    margin-top: 1;
+    background: $success;
+    color: $text;
+    border: solid $success-darken-1;
+    padding: 0 4;
+}
+
+.primary-btn:hover {
+    background: $success-lighten-1;
+    text-style: bold;
+}
+
+.info {
+    width: 100%;
+    height: auto;
+    color: $text-muted;
+    text-style: italic;
+    padding: 2;
+}
+
+/* --- Manage Feeds --- */
+
+.manage-list {
+    width: 100%;
+    height: auto;
+    border: solid $panel;
+    padding: 1;
+    overflow-y: auto;
+}
+
+.manage-row {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1;
+    background: $panel;
+    border: solid $primary;
+    padding: 1;
+}
+
+.manage-row:hover {
+    background: $surface;
+    border: solid $accent;
+}
+
+.manage-row > Vertical {
+    width: 1fr;
+    height: auto;
+    overflow: hidden;
+}
+
+.manage-name {
+    width: 100%;
+    height: auto;
+    text-style: bold;
+    color: $text;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.manage-url {
+    width: 100%;
+    height: auto;
+    color: $text-muted;
+    text-style: italic;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.delete-btn {
+    width: 12;
+    height: 3;
+    background: $error;
+    color: $text;
+    border: solid $error-darken-1;
+    align: right middle;
+}
+
+.delete-btn:hover {
+    background: $error-lighten-1;
+    text-style: bold;
+}
+
+/* --- Discover Feeds --- */
+
+.discover-list {
+    width: 100%;
+    height: auto;
+    border: solid $panel;
+    padding: 1;
+    overflow-y: auto;
+}
+
+.discover-row {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1;
+    background: $panel;
+    border: solid $primary;
+    padding: 1;
+}
+
+.discover-row:hover {
+    background: $surface;
+    border: solid $accent;
+}
+
+.discover-row > Vertical {
+    width: 1fr;
+    height: auto;
+    overflow: hidden;
+}
+
+.discover-name {
+    width: 100%;
+    height: auto;
+    text-style: bold;
+    color: $text;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.discover-url {
+    width: 100%;
+    height: auto;
+    color: $text-muted;
+    text-style: italic;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.add-discover-btn {
+    width: 10;
+    height: 3;
+    background: $success;
+    color: $text;
+    border: solid $success-darken-1;
+    align: right middle;
+}
+
+.add-discover-btn:hover {
+    background: $success-lighten-1;
+    text-style: bold;
+}
+
+/* --- Dark/Light Mode --- */
+
+Screen {
+    background: $surface;
+}
+
+/* Light Mode (default) */
+Screen.light {
+    background: #f5f5f5;
+}
+
+Screen.light #sidebar {
+    background: #e8e8e8;
+    border-right: thick #3b82f6;
+}
+
+Screen.light .sidebar-title {
+    color: #1e40af;
+    border-bottom: solid #3b82f6;
+}
+
+Screen.light .action-btn {
+    background: #3b82f6;
+    color: #ffffff;
+    border: solid #2563eb;
+}
+
+Screen.light .action-btn:hover {
+    background: #2563eb;
+}
+
+Screen.light .feed-btn {
+    background: #ffffff;
+    border: solid #d1d5db;
+    color: #1f2937;
+}
+
+Screen.light .feed-btn:hover {
+    background: #dbeafe;
+    border: solid #3b82f6;
+}
+
+Screen.light .welcome {
+    color: #1e40af;
+}
+
+Screen.light .article-content {
+    background: #ffffff;
+    border: solid #d1d5db;
+    color: #1f2937;
+}
+
+Screen.light .article-btn {
+    background: #f9fafb;
+    border: solid #d1d5db;
+    color: #1f2937;
+}
+
+Screen.light .article-btn:hover {
+    background: #dbeafe;
+}
+
+Screen.light #main-content {
+    background: #ffffff;
+}
+
+/* Dark Mode */
+Screen.dark {
+    background: #0a0a0a;
+}
+
+Screen.dark #sidebar {
+    background: #1a1a1a;
+    border-right: thick #3b82f6;
+}
+
+Screen.dark .sidebar-title {
+    color: #60a5fa;
+    border-bottom: solid #3b82f6;
+}
+
+Screen.dark .action-btn {
+    background: #1e3a8a;
+    color: #e5e7eb;
+    border: solid #3b82f6;
+}
+
+Screen.dark .action-btn:hover {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+Screen.dark .feed-btn {
+    background: #262626;
+    border: solid #404040;
+    color: #e5e7eb;
+}
+
+Screen.dark .feed-btn:hover {
+    background: #1e3a8a;
+    border: solid #3b82f6;
+}
+
+Screen.dark .welcome {
+    color: #60a5fa;
+}
+
+Screen.dark .article-content {
+    background: #1a1a1a;
+    border: solid #404040;
+    color: #e5e7eb;
+}
+
+Screen.dark .article-btn {
+    background: #262626;
+    border: solid #404040;
+    color: #e5e7eb;
+}
+
+Screen.dark .article-btn:hover {
+    background: #1e3a8a;
+}
+
+Screen.dark #main-content {
+    background: #0f0f0f;
+}
+
+Screen.dark .manage-row, Screen.dark .discover-row {
+    background: #1a1a1a;
+    border: solid #404040;
+}
+
+Screen.dark .manage-row:hover, Screen.dark .discover-row:hover {
+    background: #262626;
+    border: solid #3b82f6;
+}
+
+Screen.dark #name-input, Screen.dark #url-input, Screen.dark #search-input {
+    background: #1a1a1a;
+    border: solid #404040;
+    color: #e5e7eb;
+}
+
+Screen.dark .section-title {
+    color: #60a5fa;
 }
