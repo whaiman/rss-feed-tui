@@ -13,7 +13,7 @@ This is a fork of the original [RssTUI](https://github.com/yehorscode/RssTUI) pr
 
 ## Installation
 
-### From PyPI (recommended)
+<!-- ### From PyPI (recommended)
 
 ```bash
 pip install rss-feed-tui
@@ -23,7 +23,7 @@ Run:
 
 ```bash
 rss-feed-tui
-```
+``` -->
 
 ### From source (development)
 

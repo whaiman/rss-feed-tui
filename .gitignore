@@ -23,6 +23,10 @@ dist/
 *.swp
 *.swo
 
+# Development files
+spec/
+SPEC.md
+
 # Config files (user-specific)
 feeds.json
 discover.json
