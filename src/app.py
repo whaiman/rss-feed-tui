@@ -486,8 +486,8 @@ class RssFeedTUI(App):
 
     def on_mount(self) -> None:
         self.query_one(MainContent).show_welcome()
-        self.remove_class("dark")
-        self.add_class("light")
+        self.screen.remove_class("dark")
+        self.screen.add_class("light")
 
     @on(Sidebar.FeedSelected)
     async def _on_feed_selected(self, message: Sidebar.FeedSelected) -> None:
@@ -508,12 +508,12 @@ class RssFeedTUI(App):
         await self.query_one(Sidebar)._refresh_feeds()
 
     def action_toggle_dark(self) -> None:
-        if "dark" in self.classes:
-            self.remove_class("dark")
-            self.add_class("light")
+        if "dark" in self.screen.classes:
+            self.screen.remove_class("dark")
+            self.screen.add_class("light")
         else:
-            self.remove_class("light")
-            self.add_class("dark")
+            self.screen.remove_class("light")
+            self.screen.add_class("dark")
 
     def action_go_home(self) -> None:
         self.query_one(MainContent).show_welcome()

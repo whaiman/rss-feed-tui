@@ -696,8 +696,6 @@ Screen.dark .articles-list, Screen.dark .manage-list, Screen.dark .discover-list
 }
 
 /* --- Scrollbar Styles --- */
-
-/* По умолчанию (и для светлой темы) — тёмно-синий скроллбар */
 VerticalScroll {
     scrollbar-size: 1 1;
     scrollbar-background: #334155;
@@ -707,7 +705,6 @@ VerticalScroll {
     scrollbar-color-hover: #8b5cf6;
 }
 
-/* Тёмная тема — светло-голубой скроллбар */
 Screen.dark VerticalScroll {
     scrollbar-size: 1 1;
     scrollbar-background: #cbd5e1;
@@ -717,22 +714,18 @@ Screen.dark VerticalScroll {
     scrollbar-color-hover: #0891b2;
 }
 
-/* Общие стили скроллбара для всего приложения */
 Scrollbar {
     background: transparent;
 }
 
-/* Угол скроллбара под цвет панели/сайдбара */
 ScrollbarCorner {
     background: $panel;
 }
 
-/* Дополнительно для светлой темы */
 Screen.light ScrollbarCorner {
     background: #e8e8e8;
 }
 
-/* Дополнительно для тёмной темы */
 Screen.dark ScrollbarCorner {
     background: #1a1a1a;
 }
