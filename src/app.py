@@ -16,7 +16,7 @@ from textual.message import Message
 from textual.reactive import reactive
 from textual.widgets import Button, Footer, Header, Input, Static
 
-from async_feed import AsyncFeedLoader, AsyncFileHandler
+from .async_feed import AsyncFeedLoader, AsyncFileHandler
 
 # =============================================================================
 # HTML Cleaning Utilities
@@ -486,6 +486,7 @@ class RssFeedTUI(App):
 
     def on_mount(self) -> None:
         self.query_one(MainContent).show_welcome()
+        self.remove_class("dark")
         self.add_class("light")
 
     @on(Sidebar.FeedSelected)
@@ -507,7 +508,12 @@ class RssFeedTUI(App):
         await self.query_one(Sidebar)._refresh_feeds()
 
     def action_toggle_dark(self) -> None:
-        self.toggle_class("dark")
+        if "dark" in self.classes:
+            self.remove_class("dark")
+            self.add_class("light")
+        else:
+            self.remove_class("light")
+            self.add_class("dark")
 
     def action_go_home(self) -> None:
         self.query_one(MainContent).show_welcome()
@@ -518,11 +524,3 @@ class RssFeedTUI(App):
             search_input.focus()
         except:
             pass
-
-
-def main() -> None:
-    RssFeedTUI().run()
-
-
-if __name__ == "__main__":
-    main()

@@ -1,5 +1,6 @@
 """RSS Feed TUI Application"""
 
+from .app import *
 from .async_feed import *
 
 __version__ = "1.0.0"
